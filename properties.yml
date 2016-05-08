@@ -1,0 +1,67 @@
+# This configuration file is mapped to the ApplicationConfig class.
+#
+# We put the logback XML config in here as an example. You also have the option
+# of using the standard logback bootstrap (ie, logback.xml on classpath) and
+# then put logger level overrides in here. However, you'll need the XML here
+# if you want to, say, use different appenders for staging vs production vs dev.
+# Also, 'logggers' yaml overrides any logger configs in the XML.
+#
+
+foo: bar
+shutdownPort: 11777
+
+web:
+  port: 8082
+  initParameters:
+    "resteasy.role.based.security": true
+    "resteasy.providers": "com.github.olivereivak.ui.sis.resource.filter.AuthenticationFilter,com.github.olivereivak.ui.sis.resource.exception.ApplicationExceptionMapper"
+
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: root
+  password: root
+  url: jdbc:mysql://127.0.0.1/sis
+  properties:
+    hibernate.dialect: org.hibernate.dialect.MySQLDialect
+    hibernate.hbm2ddl.auto: validate
+    hibernate.c3p0.maxConnectionAge: 14400
+    hibernate.c3p0.maxIdleTime: 7200
+    hibernate.c3p0.idle_test_period: 400
+    hibernate.c3p0.preferredTestQuery: SELECT 1
+    hibernate.c3p0.testConnectionOnCheckin: true
+
+logging:
+  loggers:
+    "com.github.olivereivak.ui.sis": TRACE
+    "com.voodoodyne.gwizard": DEBUG
+
+  xml: |
+    <configuration>
+      <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+          <pattern>%d %5p %40.40c:%4L - %m%n</pattern>
+        </encoder>
+      </appender>
+
+      <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+          <!-- daily rollover -->
+          <fileNamePattern>logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+          <!-- keep 30 days' worth of history -->
+          <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+          <pattern>%d [%thread] %5p %logger{35} - %msg%n</pattern>
+        </encoder>
+      </appender>
+
+      <logger name="org.hibernate" level="info"/>
+
+      <root level="info">
+        <appender-ref ref="file" />
+        <appender-ref ref="console"/>
+      </root>
+    </configuration>
