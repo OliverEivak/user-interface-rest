@@ -1,5 +1,5 @@
 # user-interface-rest
-Back-end for User Interfaces Study Information System project.
+Back-end for User Interfaces Study Information System project, based on the [modified Gwizard example](https://github.com/OliverEivak/gwizard-example).
 
 ## Running
 

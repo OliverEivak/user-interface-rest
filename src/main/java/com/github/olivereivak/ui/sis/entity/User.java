@@ -41,4 +41,7 @@ public class User {
     @Column(nullable = false, length = 64)
     private String lastName;
 
+    @Column(nullable = false)
+    private int studentGroup = 0;
+
 }

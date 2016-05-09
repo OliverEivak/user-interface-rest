@@ -4,6 +4,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 
 import com.github.olivereivak.ui.sis.entity.Authentication;
+import com.github.olivereivak.ui.sis.entity.User;
 import com.github.olivereivak.ui.sis.resource.filter.ApplicationPrincipal;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,17 @@ public class BaseResource {
         }
 
         return authentication;
+    }
+
+    protected User getUser() {
+        User user = null;
+
+        Authentication authentication = getAuthentication();
+        if (authentication != null) {
+            user = authentication.getUser();
+        }
+
+        return user;
     }
 
 }
