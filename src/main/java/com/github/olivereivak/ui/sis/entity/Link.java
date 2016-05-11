@@ -18,9 +18,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Link {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "grade", nullable = false)
@@ -28,9 +28,9 @@ public class Link {
 
     @ManyToOne
     @JoinColumn(name = "user", nullable = false)
-	private User user;
+    private User user;
 
-	@Column(nullable = false, length = 2048)
-	private String url;
+    @Column(nullable = false, length = 2048)
+    private String url;
 
 }

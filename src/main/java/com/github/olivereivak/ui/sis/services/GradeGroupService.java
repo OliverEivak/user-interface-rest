@@ -14,7 +14,6 @@ public class GradeGroupService {
     @Inject
     private GradeGroupDAO gradeGroupDAO;
 
-
     public List<GradeGroup> getGradeGroups() {
         return gradeGroupDAO.findAll();
     }

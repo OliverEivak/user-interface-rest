@@ -26,7 +26,7 @@ CREATE TABLE GradeGroup (
   id                 BIGINT AUTO_INCREMENT PRIMARY KEY,
   name               VARCHAR(255)             NOT NULL,
   description        VARCHAR(255)             NOT NULL,
-  isSolo             BOOLEAN        NOT NULL DEFAULT 0
+  solo               BOOLEAN        NOT NULL DEFAULT 0
 );
 
 CREATE TABLE Grade (
@@ -34,7 +34,7 @@ CREATE TABLE Grade (
   name               VARCHAR(255)             NOT NULL,
   minValue           INT            NOT NULL DEFAULT 0,
   `maxValue`         INT            NOT NULL DEFAULT 0,
-  isLinkAllowed      BOOLEAN        NOT NULL DEFAULT 1,
+  linkAllowed        BOOLEAN        NOT NULL DEFAULT 1,
   gradeGroup         BIGINT                   NOT NULL,
 
   FOREIGN KEY (gradeGroup)

@@ -30,6 +30,6 @@ public class Grade {
     private int maxValue = 0;
 
     @Column(nullable = false)
-    private boolean isLinkAllowed = true;
+    private boolean linkAllowed = true;
 
 }

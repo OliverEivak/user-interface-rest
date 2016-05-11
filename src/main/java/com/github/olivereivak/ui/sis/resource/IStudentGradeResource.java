@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -19,6 +20,10 @@ public interface IStudentGradeResource {
 
     @GET
     @RolesAllowed({"STUDENT", "TEACHER"})
-    List<StudentGrade> getByUser(@QueryParam("user") String username);
+    List<StudentGrade> getByUser(@QueryParam("username") String username);
+
+    @POST
+    @RolesAllowed({ "TEACHER" })
+    List<StudentGrade> createOrUpdate(List<StudentGrade> studentGrades);
 
 }

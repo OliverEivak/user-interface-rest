@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.github.olivereivak.ui.sis.entity.Grade;
 import com.github.olivereivak.ui.sis.entity.Link;
@@ -37,23 +38,25 @@ public class LinkResource extends BaseResource implements ILinkResource {
     @GET
     @RolesAllowed({"STUDENT", "TEACHER"})
     @Transactional
-    public Link getByUserAndGrade(@QueryParam("username") String username, @QueryParam("grade") Long gradeID) {
+    public Response getByUserAndGrade(@QueryParam("username") String username, @QueryParam("grade") Long gradeID) {
         User loggedInUser = getUser();
         User user = userService.getByUsername(username);
         Grade grade = gradeService.getByID(gradeID);
 
-        return linkService.getByUserAndGrade(user, grade, loggedInUser);
+        if (grade == null) {
+            return Response.status(Response.Status.OK)
+                    .entity(linkService.getByUser(user, loggedInUser)).build();
+        } else {
+            return Response.status(Response.Status.OK)
+                    .entity(linkService.getByUserAndGrade(user, grade, loggedInUser)).build();
+        }
     }
 
     @POST
     @RolesAllowed({"STUDENT"})
     @Transactional
     public Link createOrUpdate(Link link) {
-        if (link.getId() == null) {
-            return linkService.create(link, getUser());
-        } else {
-            return linkService.update(link, getUser());
-        }
+        return linkService.create(link, getUser());
     }
 
     @DELETE

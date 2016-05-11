@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.github.olivereivak.ui.sis.entity.Link;
 
@@ -20,7 +21,7 @@ public interface ILinkResource {
 
     @GET
     @RolesAllowed({"STUDENT", "TEACHER"})
-    Link getByUserAndGrade(@QueryParam("username") String username, @QueryParam("grade") Long gradeID);
+    Response getByUserAndGrade(@QueryParam("username") String username, @QueryParam("grade") Long gradeID);
 
     @POST
     @RolesAllowed({"STUDENT"})

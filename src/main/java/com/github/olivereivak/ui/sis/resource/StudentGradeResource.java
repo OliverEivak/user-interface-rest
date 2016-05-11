@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -31,7 +32,7 @@ public class StudentGradeResource extends BaseResource implements IStudentGradeR
     @GET
     @RolesAllowed({"STUDENT", "TEACHER"})
     @Transactional
-    public List<StudentGrade> getByUser(@QueryParam("user") String username) {
+    public List<StudentGrade> getByUser(@QueryParam("username") String username) {
         User loggedInUser = getUser();
         User user = userService.getByUsername(username);
         if (user == null) {
@@ -39,5 +40,12 @@ public class StudentGradeResource extends BaseResource implements IStudentGradeR
         } else {
             return studentGradeService.getByUser(user, loggedInUser);
         }
+    }
+
+    @POST
+    @RolesAllowed({ "TEACHER" })
+    @Transactional
+    public List<StudentGrade> createOrUpdate(List<StudentGrade> studentGrades) {
+        return studentGradeService.createOrUpdate(studentGrades, getUser());
     }
 }

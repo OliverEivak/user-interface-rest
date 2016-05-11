@@ -18,13 +18,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class StudentGrade {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user", nullable = false)
-	private User user;
+    private User user;
 
     @Column(nullable = false)
     private int value = 0;
@@ -33,7 +33,7 @@ public class StudentGrade {
     @JoinColumn(name = "grade", nullable = false)
     private Grade grade;
 
-	@Column(nullable = false, length = 255)
-	private String comment;
+    @Column(nullable = false, length = 255)
+    private String comment;
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -28,4 +29,28 @@ public class StudentResource extends BaseResource implements IStudentResource {
     public List<User> getStudents() {
         return userService.getStudents();
     }
+
+    @POST
+    @RolesAllowed({"TEACHER"})
+    @Transactional
+    public User update(User user) {
+        return userService.update(user);
+    }
+
+    @POST
+    @Path("/join")
+    @RolesAllowed({"TEACHER"})
+    @Transactional
+    public List<User> join(List<User> users) {
+        return userService.join(users);
+    }
+
+    @POST
+    @Path("/split")
+    @RolesAllowed({"TEACHER"})
+    @Transactional
+    public List<User> split(List<User> users) {
+        return userService.split(users);
+    }
+
 }

@@ -11,9 +11,6 @@ import com.github.olivereivak.ui.sis.services.LoginService;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Path("/login")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)

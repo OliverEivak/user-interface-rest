@@ -1,5 +1,7 @@
 package com.github.olivereivak.ui.sis.dao;
 
+import java.util.List;
+
 import javax.persistence.TypedQuery;
 
 import com.github.olivereivak.ui.sis.entity.Grade;
@@ -13,6 +15,12 @@ public class LinkDAO extends BaseDAO<Link> {
         typedQuery.setParameter("user", user);
         typedQuery.setParameter("grade", grade);
         return getSingleResult(typedQuery);
+    }
+
+    public List<Link> findByUser(User user) {
+        TypedQuery<Link> typedQuery = em().createQuery("SELECT l FROM Link l WHERE l.user = :user", Link.class);
+        typedQuery.setParameter("user", user);
+        return typedQuery.getResultList();
     }
 
     public Link findByID(Long id) {

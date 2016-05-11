@@ -1,5 +1,8 @@
 # user-interface-rest
-Back-end for User Interfaces Study Information System project, based on the [modified Gwizard example](https://github.com/OliverEivak/gwizard-example).
+Back-end for [User Interfaces](http://lambda.ee/wiki/Kasutajaliidesed) Study Information System project,
+based on the [modified Gwizard example](https://github.com/OliverEivak/gwizard-example).
+
+Front-end can be found [here](https://github.com/OliverEivak/user-interface).
 
 ## Running
 
